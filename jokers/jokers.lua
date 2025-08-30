@@ -818,15 +818,13 @@ SMODS.Joker{
         if context.individual and context.cardarea == G.play and context.other_card.ability.name == 'Lucky Card' and (not context.other_card.lucky_trigger) and (not context.blueprint) then
             card.ability.extra.x_mult = card.ability.extra.x_mult + 0.25
             return {
-                message = "Died Far",
-                colour = G.C.RED
+                extra = { focus = card, message = "Karma", colour = G.C.Red}
             }
         end
         if context.individual and context.other_card.lucky_trigger and (not context.blueprint) then
             card.ability.extra.x_mult = 1
             return {
-                message = "Patience...",
-                colour = G.C.RED
+                extra = { focus = card, message = "Patience...", colour = G.C.Red}
             }
 		end
     end;
