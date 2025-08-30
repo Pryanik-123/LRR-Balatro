@@ -856,8 +856,9 @@ SMODS.Joker{
     atlas = 'jaynt',                                
 
     calculate = function(self,card,context)
-        if card.added_to_deck and (not context.blueprint) then
-            card.added_to_deck = false
+        local added = false
+        if card.added_to_deck and (not context.blueprint) and added == false then
+            added = true
             G.E_MANAGER:add_event(Event({func = function()
             change_shop_size(5)
             return true end }))
