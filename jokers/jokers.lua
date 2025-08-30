@@ -172,7 +172,7 @@ SMODS.Joker{
     calculate = function(self,card,context)
         if context.cardarea == G.jokers then
             if context.before then
-                if context.scoring_name == 'Flush' and (not context.blueprint) then
+                if context.scoring_name == 'Flush' or context.scoring_name == 'Straight Flush' and (not context.blueprint) then
                     local cards = {}
                     for k, v in ipairs(context.scoring_hand) do
                         if not v:is_suit('Spades') then 
