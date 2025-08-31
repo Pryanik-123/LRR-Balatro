@@ -866,7 +866,7 @@ SMODS.Joker{
             end
         end
         if context.selling_self and (not context.blueprint) then
-            if not card.ability.extra.isAdded then
+            if card.ability.extra.isAdded then
                 G.E_MANAGER:add_event(Event({func = function()
                 change_shop_size(-5)
                 return true end }))
