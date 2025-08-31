@@ -163,7 +163,7 @@ return {
                     "{C:attention}+5{} card slots",
                     "available in shop",
                     "{C:red}#1#{} hand size",
-                    "{C:inactive}(NEGATIVE EFFECT DOESNT WORK ON HIM){}"
+                    "{C:inactive}(NEGATIVE EFFECT DOESNT WORK ON HIM){}",
                     "{C:inactive}(Who put me here)"
                 }
             },
