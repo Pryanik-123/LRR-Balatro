@@ -163,8 +163,9 @@ return {
                     "{C:attention}+5{} card slots",
                     "available in shop",
                     "{C:red}#1#{} hand size",
-                    "{C:inactive}(NEGATIVE EFFECT DOESNT WORK ON HIM){}",
-                    "{C:inactive}(Who put me here)"
+                    "{C:inactive}(Who put me here)",
+                    "{C:red}NEGATIVE EFFECT DOESNT WORK PROPERLY",
+                    "{C:red}ON HIM IDK HOW TO FIX IT"
                 }
             },
             j_lrr_dangadash = {
