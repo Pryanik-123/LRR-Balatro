@@ -30,7 +30,7 @@ return {
             j_lrr_nejus = {
                 name = "Nejus",
                 text = {
-                    "If played hand is",
+                    "If played hand has",
                     "a {C:attention}Flush{}, change card",
                     "suit to {C:spades}Spades{}",
                     "{C:inactive}(Monkey mode)"
