@@ -397,7 +397,7 @@ SMODS.Joker{
     atlas = 'iconic',                                
 
     calculate = function(self,card,context)
-        if context.end_of_round and not (context.blueprint_card or card).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        if context.end_of_round and not (context.blueprint_card or card).getting_sliced and #G.consumeables.cards + G.GAME.consumeable_buffer < 3 then
             if G.ARGS.chip_flames.real_intensity > 0.000001 then
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 G.E_MANAGER:add_event(Event({
