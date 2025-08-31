@@ -871,7 +871,6 @@ SMODS.Joker{
                 change_shop_size(-5)
                 return true end }))
                 G.hand:change_size(-card.ability.extra.h_size)
-                card.ability.extra.isAdded = false
             end
         end
     end;
