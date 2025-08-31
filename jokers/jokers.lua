@@ -842,7 +842,7 @@ SMODS.Atlas({
 })
 SMODS.Joker{
     key = "jaynt",                                  
-    config = { extra = { h_size = -3 } },                
+    config = { extra = { h_size = -3, isAdded = false } },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 2,                                        
@@ -857,17 +857,22 @@ SMODS.Joker{
 
     calculate = function(self,card,context)
         if card.added_to_deck and (not context.blueprint) then
-            card.added_to_deck = false
-            G.E_MANAGER:add_event(Event({func = function()
-            change_shop_size(5)
-            return true end }))
-            G.hand:change_size(card.ability.extra.h_size)
+            if not card.ability.extra.isAdded then
+                G.E_MANAGER:add_event(Event({func = function()
+                change_shop_size(5)
+                return true end }))
+                G.hand:change_size(card.ability.extra.h_size)
+                card.ability.extra.isAdded = true
+            end
         end
         if context.selling_self and (not context.blueprint) then
-            G.E_MANAGER:add_event(Event({func = function()
-            change_shop_size(-5)
-            return true end }))
-            G.hand:change_size(-card.ability.extra.h_size)
+            if not card.ability.extra.isAdded then
+                G.E_MANAGER:add_event(Event({func = function()
+                change_shop_size(-5)
+                return true end }))
+                G.hand:change_size(-card.ability.extra.h_size)
+                card.ability.extra.isAdded = false
+            end
         end
     end;
 

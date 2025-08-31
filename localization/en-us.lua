@@ -164,8 +164,6 @@ return {
                     "available in shop",
                     "{C:red}#1#{} hand size",
                     "{C:inactive}(Who put me here)",
-                    "{C:red}NEGATIVE EFFECT DOESNT WORK PROPERLY",
-                    "{C:red}ON HIM SOMETIMES, IDK HOW TO FIX IT"
                 }
             },
             j_lrr_dangadash = {
