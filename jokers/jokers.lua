@@ -576,7 +576,7 @@ SMODS.Joker{
     rarity = 2,                                        
     cost = 8,                                        
     blueprint_compat=false,                             
-    eternal_compat=true,                           
+    eternal_compat=false,                           
     unlocked = true,                                    
     discovered = false,                                 
     effect=nil,                                        
