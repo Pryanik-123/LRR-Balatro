@@ -40,7 +40,7 @@ SMODS.Joker{
                         card = card,
                     }
                 else
-                    G.GAME.blind.chips = math.floor(G.GAME.blind.chips * 0.95)
+                    G.GAME.blind.chips = math.floor(G.GAME.blind.chips * 0.9)
                     G.GAME.blind.chip_text = G.GAME.blind.chips
                     return{
                         extra = { focus = card, message = "All y'all high refresh players who think Sonic Wave is easier then Erebus, first of all shut the fuck up and 2nd of all of the wave plays by itself for you guys."}
@@ -121,8 +121,8 @@ SMODS.Joker{
     config = { extra = { x_mult = 1, x_mult_mod = 0.5 } },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
-    rarity = 2,                                        
-    cost = 7,                                        
+    rarity = 3,                                        
+    cost = 8,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    
@@ -159,8 +159,8 @@ SMODS.Joker{
     config = { extra = {} },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
-    rarity = 2,                                        
-    cost = 5,                                        
+    rarity = 1,                                        
+    cost = 3,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    
@@ -274,7 +274,7 @@ SMODS.Joker{
     calculate = function(self,card,context)
         if context.discard and context.other_card:get_id() == 12 and (not context.blueprint) then
             if not context.other_card.debuff then
-                card.ability.extra.mult = card.ability.extra.mult + 2
+                card.ability.extra.mult = card.ability.extra.mult + 1
                 return {
                     message = 'Bye Bye Queen',
                     card = card,
@@ -308,7 +308,7 @@ SMODS.Joker{
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 3,                                        
-    cost = 8,                                        
+    cost = 7,                                        
     blueprint_compat=false,                             
     eternal_compat=false,                           
     unlocked = true,                                    
@@ -635,7 +635,7 @@ SMODS.Atlas({
 })
 SMODS.Joker{
     key = "truebolt",                                  
-    config = { extra = { x_chips = 1.2 } },                
+    config = { extra = { x_chips = 1.25 } },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 2,                                        
@@ -683,8 +683,8 @@ SMODS.Joker{
     config = { extra = {dollars = 1}},                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
-    rarity = 1,                                        
-    cost = 5,                                        
+    rarity = 2,                                        
+    cost = 7,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    
@@ -718,7 +718,7 @@ SMODS.Atlas({
 })
 SMODS.Joker{
     key = "cejelost",                                  
-    config = { extra = { mult = 10, chips = 50, dollars = 2, x_mult = 1.2, x_chips = 1.2, chance = 5}},                
+    config = { extra = { mult = 10, chips = 50, dollars = 5, x_mult = 1.2, x_chips = 1.2, chance = 5}},                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 2,                                        
@@ -891,7 +891,7 @@ SMODS.Joker{
     config = { extra = { chips = 0 } },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
-    rarity = 1,                                        
+    rarity = 2,                                        
     cost = 4,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
@@ -904,7 +904,7 @@ SMODS.Joker{
     calculate = function(self,card,context)
         if context.individual and context.cardarea == G.play and (not context.blueprint) then
             if context.other_card:get_id() == 11 then
-                card.ability.extra.chips = card.ability.extra.chips + 10
+                card.ability.extra.chips = card.ability.extra.chips + 5
                 return {
                     extra = { focus = card, message = "Hey daddy", colour = G.C.CHIPS},
                     card = card
@@ -936,8 +936,8 @@ SMODS.Joker{
     config = { extra = { x_mult = 1 } },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
-    rarity = 3,                                        
-    cost = 8,                                        
+    rarity = 2,                                        
+    cost = 7,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    
@@ -1132,8 +1132,8 @@ SMODS.Joker{
     config = { extra = {dollars = 3} },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
-    rarity = 2,                                        
-    cost = 8,                                        
+    rarity = 1,                                        
+    cost = 5,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    
@@ -1385,7 +1385,7 @@ SMODS.Joker{
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 1,                                        
-    cost = 5,                                        
+    cost = 4,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    
@@ -1421,7 +1421,7 @@ SMODS.Joker{
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 3,                                        
-    cost = 9,                                        
+    cost = 7,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    

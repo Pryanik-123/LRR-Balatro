@@ -4,7 +4,7 @@ return {
             j_lrr_tipito = {
                 name = "Tipito",
                 text = {
-                    "Damages blinds by {C:green}5%{} for",
+                    "Damages blinds by {C:green}10%{} for",
                     "each scored {C:attention}3{} or {C:attention}6{}",
                     "{C:inactive} (hugs you for free)"
                 },
@@ -48,7 +48,7 @@ return {
             j_lrr_hombie = {
                 name = "HombieBearCat",
                 text = {
-                    "{C:red}+2{} Mult for each",
+                    "{C:red}+1{} Mult for each",
                     "discarded {C:attention}Queen{}", 
                     "{C:inactive}(Currently {C:red}+#1#{} {C:inactive}Mult)",
                     "{C:inactive}(Now THIS is PROPER SCRAN)"
@@ -169,7 +169,7 @@ return {
             j_lrr_dangadash = {
                 name = "Dangadash",
                 text = {
-                    "{C:chips}+10{} Chips for each",
+                    "{C:chips}+5{} Chips for each",
                     "scored {C:attention}Jack{}", 
                     "{C:inactive}(Currently {C:chips}+#1#{} {C:inactive}Chips)",
                     "{C:inactive}(Baby girl's home, daddy)"
