@@ -177,9 +177,9 @@ SMODS.Joker{
                     for k, v in ipairs(context.scoring_hand) do
                         if not v:is_suit('Spades') then 
                             cards[#cards+1] = v
-                            v:change_suit('Spades')
                             G.E_MANAGER:add_event(Event({
                                 func = function()
+                                    v:change_suit('Spades')
                                     v:juice_up()
                                     return true
                                 end
@@ -319,7 +319,7 @@ SMODS.Joker{
 
     calculate = function(self,card,context)
         if context.selling_self and (not context.blueprint) then
-            local seals = {'Red', 'Blue', 'Gold', 'Purple', 'lrr_plus_seal', 'lrr_ulrr_seal'}
+            local seals = {'Red', 'Blue', 'Gold', 'Purple', 'lrr_plus_seal', 'lrr_ulrr_seal', 'lrr_hrr_seal'}
             for i = 1, #G.hand.cards do
                 if G.hand.cards[i].seal == nil then
                     G.hand.cards[i].seal = seals[math.random(1,6)]
@@ -522,6 +522,7 @@ SMODS.Joker{
     end;
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
         return { vars = {(G.GAME.probabilities.normal or 1)} }
     end
 }
@@ -684,7 +685,7 @@ SMODS.Joker{
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 2,                                        
-    cost = 7,                                        
+    cost = 6,                                        
     blueprint_compat=true,                             
     eternal_compat=true,                           
     unlocked = true,                                    
@@ -830,6 +831,7 @@ SMODS.Joker{
     end;
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_lucky
         return { vars = {card.ability.extra.x_mult} }
     end
 }
@@ -842,7 +844,7 @@ SMODS.Atlas({
 })
 SMODS.Joker{
     key = "jaynt",                                  
-    config = { extra = { h_size = -3, isAdded = false } },                
+    config = { extra = { h_size = -3 } },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 2,                                        
@@ -855,25 +857,15 @@ SMODS.Joker{
     soul_pos=nil,                                        
     atlas = 'jaynt',                                
 
-    calculate = function(self,card,context)
-        if card.added_to_deck and (not context.blueprint) then
-            if not card.ability.extra.isAdded then
-                G.E_MANAGER:add_event(Event({func = function()
-                change_shop_size(5)
-                return true end }))
-                G.hand:change_size(card.ability.extra.h_size)
-                card.ability.extra.isAdded = true
-            end
-        end
-        if context.selling_self and (not context.blueprint) then
-            if card.ability.extra.isAdded then
-                G.E_MANAGER:add_event(Event({func = function()
-                change_shop_size(-5)
-                return true end }))
-                G.hand:change_size(-card.ability.extra.h_size)
-            end
-        end
-    end;
+    add_to_deck = function(self, card, from_debuff)
+        change_shop_size(5)
+        G.hand:change_size(card.ability.extra.h_size)
+    end,
+    remove_from_deck = function(self, card, from_debuff) 
+        change_shop_size(-5)
+        G.hand:change_size(-card.ability.extra.h_size)
+    end,
+
 
     loc_vars = function(self, info_queue, card)
         return { vars = {card.ability.extra.h_size} }
@@ -965,6 +957,7 @@ SMODS.Joker{
     end;
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
         return { vars = { card.ability.extra.x_mult } }
     end
 }
@@ -1052,6 +1045,7 @@ SMODS.Joker{
     end;
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_lucky
         return { }
     end
 }
@@ -1242,6 +1236,7 @@ SMODS.Joker{
     end;
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
         return { vars = {(G.GAME.probabilities.normal or 1)}}
     end
 }
@@ -1450,10 +1445,470 @@ SMODS.Joker{
     end;
 
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_lrr_card
         return { vars = {card.ability.extra.x_mult} }
     end
 }
 
+SMODS.Atlas({
+    key = "swm",
+    path = "j_swm.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "swm",                                  
+    config = { extra = { x_mult = 0.25, current_x_mult = 1} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 3,                                        
+    cost = 7,                                        
+    blueprint_compat=true,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'swm',                                
+
+    calculate = function(self,card,context)
+        if (not context.blueprint) then
+            card.ability.extra.current_x_mult = 1 + (card.ability.extra.x_mult * G.GAME.round_resets.blind_ante)
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+            return{
+                x_mult = card.ability.extra.current_x_mult,
+                card = card
+            }
+        end 
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.x_mult, card.ability.extra.current_x_mult } }
+    end
+}
+
+SMODS.Atlas({
+    key = "vipervenom",
+    path = "j_vipervenom.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "vipervenom",                                  
+    config = { extra = { dollars = 4} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 2,                                        
+    cost = 7,                                        
+    blueprint_compat=true,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'vipervenom',                                
+
+    calculate = function(self,card,context)
+        if context.individual and context.cardarea == G.play then
+            local cards = 0
+            for k, v in ipairs(context.scoring_hand) do
+                if v.seal == "lrr_hrr_seal" then 
+                    cards = cards + 1
+                end
+            end
+            if cards == #G.play.cards then
+                return{
+                    dollars = card.ability.extra.dollars,
+                    card = card
+                }
+            end
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end
+}
+
+SMODS.Atlas({
+    key = "emerald",
+    path = "j_emerald.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "emerald",                                  
+    config = { extra = { spectral_x_mult = 0.25, tarot_x_mult = 0.1, current_xmult = 1} },                
+    pos = { x = 0, y = 0 },       
+    pools = {["LRRmodAddition"] = true},                     
+    rarity = 2,                                        
+    cost = 8,                                        
+    blueprint_compat=true,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'emerald',                                
+
+    calculate = function(self,card,context)
+        if context.using_consumeable then
+            if context.consumeable.ability.set == "Spectral" and (not context.blueprint) then
+                card.ability.extra.current_xmult = card.ability.extra.current_xmult + card.ability.extra.spectral_x_mult
+                return {
+                    extra = { focus = card, message = 'Yum!', colour = G.C.PM.BLUE},
+                }
+            end
+            if context.consumeable.ability.set == "Tarot" and (not context.blueprint) then
+                card.ability.extra.current_xmult = card.ability.extra.current_xmult + card.ability.extra.tarot_x_mult
+                return {
+                    extra = { focus = card, message = 'Yum!', colour = G.C.PM.ORANGE},
+                }
+            end
+        end
+        if context.joker_main and context.cardarea == G.jokers then
+            return{
+                x_mult = card.ability.extra.current_xmult,
+                card = card,
+            }
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.spectral_x_mult, card.ability.extra.tarot_x_mult, card.ability.extra.current_xmult } }
+    end
+}
+
+
+SMODS.Atlas({
+    key = "derpy",
+    path = "j_derpy.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "derpy",                                  
+    config = { extra = {} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 2,                                        
+    cost = 7,                                        
+    blueprint_compat=true,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'derpy',                                
+
+    calculate = function(self,card,context)
+        if context.setting_blind and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            if G.GAME.blind:get_type() ~= 'Boss' then
+                local card = create_card(nil, G.consumeables, nil, nil, nil, nil, 'c_lrr_lrr', 'derpy')
+                card:add_to_deck()
+                G.consumeables:emplace(card)
+                active = false
+                return{message = ":p"}
+            else
+                local randomize = math.random(1,3)
+                local card
+                if randomize == 1 then
+                    card = create_card(nil, G.consumeables, nil, nil, nil, nil, 'c_lrr_monitor', 'derpy')
+                elseif randomize == 2 then
+                    card = create_card(nil, G.consumeables, nil, nil, nil, nil, 'c_lrr_computer', 'derpy')
+                elseif randomize == 3 then
+                    card = create_card(nil, G.consumeables, nil, nil, nil, nil, 'c_lrr_cbf', 'derpy')
+                end
+                card:add_to_deck()
+                G.consumeables:emplace(card)
+                active = false
+                return{message = ":p"}
+            end
+            
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_lrr_lrr
+        return { vars = {} }
+    end
+}
+
+SMODS.Atlas({
+    key = "ryan",
+    path = "j_ryan.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "ryan",                                  
+    config = { extra = {} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 3,                                        
+    cost = 7,                                        
+    blueprint_compat=false,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'ryan',                                
+
+    calculate = function(self,card,context)
+        if context.remove_playing_cards and (not context.blueprint) then
+            for k, v in ipairs(context.removed) do
+                if v.seal ~= nil then 
+                    if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                        G.E_MANAGER:add_event(Event({
+                        func = (function()
+                            G.E_MANAGER:add_event(Event({
+                                func = function() 
+                                    local carde = create_card('Spectral',G.consumeables, nil, nil, nil, nil, nil, 'car')
+                                    carde:add_to_deck()
+                                    G.consumeables:emplace(carde)
+                                    G.GAME.consumeable_buffer = 0
+                                    return true
+                                end}))   
+                                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.BLUE})                       
+                            return true
+                        end)}))
+                    end
+                end
+            end
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end
+}
+
+SMODS.Atlas({
+    key = "mik",
+    path = "j_mik.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "mik",                                  
+    config = { extra = {} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 3,                                        
+    cost = 10,                                        
+    blueprint_compat=false,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'mik',                                
+
+    calculate = function(self,card,context)
+        if context.open_booster and #G.jokers.cards < G.jokers.config.card_limit and (not context.blueprint) then
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                play_sound('timpani')
+                local card = create_card("Joker", G.jokers, nil, nil, nil, nil, nil, 'mik')
+                card:add_to_deck()
+                G.jokers:emplace(card)
+                return true end }))
+            delay(0.6)
+            return { extra = { focus = card, message = 'PERSONA!', colour = G.C.RED } }
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end
+}
+
+SMODS.Atlas({
+    key = "hydrus",
+    path = "j_hydrus.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "hydrus",                                  
+    config = { extra = {x_mult = 5, isActive = true} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 2,                                        
+    cost = 6,                                        
+    blueprint_compat=true,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'hydrus',                                
+
+    calculate = function(self,card,context)
+        if context.cardarea == G.jokers and context.joker_main then
+            return{
+                x_mult = card.ability.extra.x_mult,
+                card = card
+            }
+        end
+        G.SETTINGS.GAMESPEED = 0.5 
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = {card.ability.extra.x_mult} }
+    end
+}
+
+SMODS.Atlas({
+    key = "jude",
+    path = "j_jude.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "jude",                                  
+    config = { extra = {mult = 0.56714, current_hands = 1} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 1,                                        
+    cost = 5,                                        
+    blueprint_compat=true,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'jude',                                
+
+    calculate = function(self,card,context)
+        if context.after and context.cardarea == G.jokers and (not context.blueprint) then
+            card.ability.extra.current_hands = card.ability.extra.current_hands + 1
+                return {
+                    message = 'Bromega',
+                    colour = G.C.RED
+                }
+        end
+        if context.joker_main and context.cardarea == G.jokers then
+            return{
+                mult = card.ability.extra.mult * card.ability.extra.current_hands,
+                card = card
+            }
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = {card.ability.extra.mult, card.ability.extra.mult*card.ability.extra.current_hands} }
+    end
+}
+
+SMODS.Atlas({
+    key = "influ",
+    path = "j_influ.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "influ",                                  
+    config = { extra = {x_chips = 0.1, current_x_chips = 1} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 2,                                        
+    cost = 5,                                        
+    blueprint_compat=true,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'influ',                                
+
+    calculate = function(self,card,context)
+        if context.selling_card and (not context.blueprint) then
+            card.ability.extra.current_x_chips = card.ability.extra.current_x_chips + card.ability.extra.x_chips
+            G.E_MANAGER:add_event(Event({
+                    func = function() card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex')}); return true
+                end}))
+        end
+        if context.joker_main and context.cardarea == G.jokers then
+            return{
+                x_chips = card.ability.extra.current_x_chips,
+                card = card
+            }
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = {card.ability.extra.x_chips, card.ability.extra.current_x_chips} }
+    end
+}
+
+SMODS.Atlas({
+    key = "bittersweet",
+    path = "j_bittersweet.png",
+    px = 71,
+    py = 95
+})
+SMODS.Joker{
+    key = "bittersweet",                                  
+    config = { extra = {num = 1, hand = 'High Card'} },                
+    pos = { x = 0, y = 0 },             
+    pools = {["LRRmodAddition"] = true},            
+    rarity = 3,                                        
+    cost = 9,                                        
+    blueprint_compat=false,                             
+    eternal_compat=true,                           
+    unlocked = true,                                    
+    discovered = false,                                 
+    effect=nil,                                        
+    soul_pos=nil,                                        
+    atlas = 'bittersweet',                                
+
+    set_ability = function(self, card, initial, delay_sprites)
+		local _poker_hands = {}
+		for k, v in pairs(G.GAME.hands) do
+			if v.visible then
+				_poker_hands[#_poker_hands + 1] = k
+			end
+		end
+		card.ability.extra.hand = _poker_hands[math.random(1, #_poker_hands)]
+        card.ability.extra.num = math.random(1, G.GAME.round_resets.hands or 4)
+	end,
+
+    calculate = function(self,card,context)
+        if context.end_of_round and context.cardarea == G.jokers and (not context.blueprint) then
+            local _poker_hands = {}
+            for k, v in pairs(G.GAME.hands) do
+                if v.visible then
+                    _poker_hands[#_poker_hands + 1] = k
+                end
+            end
+            card.ability.extra.hand = _poker_hands[math.random(1, #_poker_hands)]
+            card.ability.extra.num = math.random(1, G.GAME.round_resets.hands or 4)
+            return {
+                extra = { focus = card, message = 'Reset!'},
+            }
+        end
+        if context.before and context.cardarea == G.jokers and (not context.blueprint) then
+            if G.GAME.current_round.hands_played == card.ability.extra.num - 1 and context.scoring_name == card.ability.extra.hand then
+                for k, v in ipairs(context.scoring_hand) do
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            v:set_edition({negative = true}, true)
+                            v:juice_up()
+                            return true
+                        end
+                        }))
+                end
+            end
+        end
+    end;
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = {card.ability.extra.num, localize(card.ability.extra.hand, "poker_hands")} }
+    end
+}
 
 function showCrash()
     play_sound('lrr_bsod', 1, 100)

@@ -150,8 +150,8 @@ return {
             j_lrr_typier = {
                 name = "TyPier",
                 text = {
-                    "Gains {X:mult,C:white}X0.25{} Mult every time a",
-                    "scored {C:attention}Lucky card{} doesn't trigger",
+                    "This joker gains {X:mult,C:white}X0.25{} Mult everytime",
+                    "a scored {C:attention}Lucky card{} doesn't trigger",
                     "Resets when a {C:attention}Lucky card{} triggers",
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
                     "{C:inactive}(Never celebrate too early)"
@@ -178,8 +178,8 @@ return {
             j_lrr_raptor = {
                 name = "ElectroRaptor71",
                 text = {
-                    "Gains {X:mult,C:white}X0.1{} Mult every time a",
-                    "scored {C:attention}Glass card{} doesn't break",
+                    "This joker gains {X:mult,C:white}X0.1{} Mult everytime",
+                    "a scored {C:attention}Glass card{} doesn't break",
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
                     "{C:inactive}(May the god be with us)"
                 }
@@ -270,6 +270,97 @@ return {
                     "held in hand ",
                     "gives {X:mult,C:white}X#1#{} Mult",
                     "{C:inactive}(Prisma by CooperSuper)"
+                }
+            },
+            j_lrr_swm = {
+                name = "SeaWolfMikes",
+                text = {
+                    "This joker gains {X:mult,C:white}X#1#{} Mult",
+                    "for each completed {X:attention,C:white}Ante{}",
+                    "you {C:attention}currently{} have",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{} {C:inactive}Mult)",
+                    "{C:inactive}(Climbing Up)"
+                }
+            },
+            j_lrr_vipervenom = {
+                name = "ViperVenom95",
+                text = {
+                    "if all cards in your played",
+                    "hand have {X:mult,C:white}HRR{} {C:attention}Seals{}, gives",
+                    "you back all the money",
+                    "you lose from {X:mult,C:white}HRR{} {C:attention}Seals{}",
+                    "and {C:attention}earns{} extra {C:money}$1{}",
+                    "{C:inactive}(Fraud)"
+                }
+            },
+            j_lrr_emerald = {
+                name = "WhiteEmerald",
+                text = {
+                    "This joker gains {X:mult,C:white}X#1#{} Mult for each used {C:spectral}Spectral{}",
+                    "card and {X:mult,C:white}X#2#{} Mult for each used {C:tarot}Tarot{} card",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{} {C:inactive}Mult)",
+                    "{C:inactive}(gimme more)"
+                }
+            },
+            j_lrr_derpy = {
+                name = "DerpyGuy",
+                text = {
+                    "Creates {C:attention}The Handicap{} card every blind",
+                    "Creates a random {C:attention}LRR Mod Seal{}",
+                    "card on boss blind",
+                    "{C:inactive}:p"
+                }
+            },
+            j_lrr_ryan = {
+                name = "Ryan9328",
+                text = {
+                    "Creates a {C:spectral}Spectral{} card when",
+                    "card with seal is {C:attention}destroyed{}",
+                    "{C:inactive}(trademark)"
+                }
+            },
+            j_lrr_mik = {
+                name = "Miky177",
+                text = {
+                    "Creates a random {X:black,C:mult}Joker{} card",
+                    "everytime a {C:attention}Booster Pack{} is opened",
+                    "{C:inactive}(Must have room)",
+                    "{C:inactive}(The Fool Arcana)"
+                }
+            },
+            j_lrr_hydrus = {
+                name = "Hydrus73",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult, locks your",
+                    "{C:attention}Game Speed{} to {C:attention}0.5{}",
+                    "{C:inactive}(nah hol on gimme a minute)"
+                }
+            },
+            j_lrr_jude = {
+                name = "Jude",
+                text = {
+                    "{C:mult}+#1#{} Mult for every hand played",
+                    "{C:inactive}(Currently {C:mult}+#2#{}{}{C:inactive} Mult)",
+                    "{C:inactive}(Omega)"
+                }
+            },
+            j_lrr_influ = {
+                name = "Influentia",
+                text = {
+                    "This joker gains {X:chips,C:white}X#1#{} Chips",
+                    "for each card {C:attention}sold",
+                    "{C:inactive}(Currently {X:chips,C:white}X#2#{} {C:inactive}Chips)",
+                    "{C:inactive}(FrapleSweetness)"
+                }
+            },
+            j_lrr_bittersweet = {
+                name = "BitterSweet",
+                text = {
+                    "if {C:attention}#1#{}{C:inactive,s:0.7}(st/nd/rd/th){} hand is a {C:attention}#2#",
+                    "turn all scored cards {C:dark_edition}Negative",
+                    "{C:attention}poker hand{} and {C:attention}hand number",
+                    "changes at end of round",
+                    "{C:inactive}(hate bittersweet)"
                 }
             }
         }
