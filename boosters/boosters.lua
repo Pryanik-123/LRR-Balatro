@@ -31,7 +31,6 @@ SMODS.Booster{
     kind = "LrrPack",
     
     create_card = function(self, card, i)
-        ease_background_colour(HEX("0dbaff"))
         return SMODS.create_card({
             set = "LRRmodAddition",
             area = G.pack_cards,
@@ -77,7 +76,6 @@ SMODS.Booster{
     kind = "LrrPack",
     
     create_card = function(self, card, i)
-        ease_background_colour(HEX("0dbaff"))
         return SMODS.create_card({
             set = "LRRmodAddition",
             area = G.pack_cards,
