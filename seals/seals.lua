@@ -36,6 +36,10 @@ SMODS.Seal {
                 chips = self.config.current_chips,
             }
         end
+        if context.game_over then 
+            self.config.current_mult = 1
+            self.config.current_chips = 10
+        end
     end,
 }
 
