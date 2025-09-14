@@ -17,6 +17,7 @@ SMODS.Seal {
             '{C:red}+#1#{} Mult and {C:chips}+#2#{} Chips for',
             'everytime a {C:green}LRR+ Seal{} {C:attention}scored{}',
             '{C:inactive}(Currently {C:red}+#3#{}{C:inactive} Mult and {C:chips}+#4#{}{C:inactive} Chips)'
+
         }
     },
 
@@ -35,10 +36,6 @@ SMODS.Seal {
                 mult = self.config.current_mult,
                 chips = self.config.current_chips,
             }
-        end
-        if G.GAME.round == 1 then 
-            self.config.current_mult = 1
-            self.config.current_chips = 10
         end
     end,
 }
