@@ -16,7 +16,8 @@ SMODS.Seal {
         text = {
             '{C:red}+#1#{} Mult and {C:chips}+#2#{} Chips for',
             'everytime a {C:green}LRR+ Seal{} {C:attention}scored{}',
-            'resets after scoring'
+            'resets after scoring',
+            "{C:inactive}(Starts with {C:red}+#3#{} {C:inactive}Mult and {C:chips}+#4#{} {C:inactive}Chips{})"
         }
     },
 
