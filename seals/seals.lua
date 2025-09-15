@@ -9,13 +9,14 @@ SMODS.Seal {
     name = "plus_seal",
     key = "plus_seal",
     badge_colour = HEX("00ccff"),
-	config = { mult = 1, chips = 2.5, current_mult = 1, current_chips = 10  },
+	config = { mult = 1, chips = 5, current_mult = 1, current_chips = 10  },
     loc_txt = {
         label = 'LRR+ Seal',
         name = 'LRR+ Seal',
         text = {
             '{C:red}+#1#{} Mult and {C:chips}+#2#{} Chips for',
             'everytime a {C:green}LRR+ Seal{} {C:attention}scored{}',
+            'resets after scoring',
             '{C:inactive}(Currently {C:red}+#3#{}{C:inactive} Mult and {C:chips}+#4#{}{C:inactive} Chips)'
 
         }
@@ -29,6 +30,10 @@ SMODS.Seal {
     pos = {x=0, y=0},
 
     calculate = function(self, card, context)
+        if context.before or context.after then
+            self.config.current_mult = 1
+            self.config.current_chips = 10
+        end
         if context.main_scoring and context.cardarea == G.play then
             self.config.current_mult = self.config.current_mult + self.config.mult
             self.config.current_chips = self.config.current_chips + self.config.chips
