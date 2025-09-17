@@ -1146,7 +1146,7 @@ SMODS.Atlas({
 })
 SMODS.Joker{
     key = "donut",                                  
-    config = { extra = {dollars = 2} },                
+    config = { extra = {dollars = 3} },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 1,                                        
