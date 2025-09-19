@@ -456,7 +456,7 @@ SMODS.Atlas({
 })
 SMODS.Joker{
     key = "samamba",                                  
-    config = { extra = { x_mult = 2, x_chips = 2, chance = 6} },                
+    config = { extra = { x_mult = 2, x_chips = 2, chance = 8} },                
     pos = { x = 0, y = 0 },             
     pools = {["LRRmodAddition"] = true},            
     rarity = 2,                                        

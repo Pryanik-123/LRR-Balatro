@@ -86,7 +86,7 @@ return {
                 name = "Samamba",
                 text = {
                     "{X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#2#{} Chips",
-                    "{C:green}#3# in 6{} chance to",
+                    "{C:green}#3# in 8{} chance to",
                     "{C:attention}crash the game",
                     "{C:inactive}(Panas)"
                 }
