@@ -41,7 +41,7 @@ SMODS.Joker{
                         card = card,
                     }
                 else
-                    G.GAME.blind.chips = math.floor(G.GAME.blind.chips * 0.9)
+                    G.GAME.blind.chips = math.floor(G.GAME.blind.chips * 0.85)
                     G.GAME.blind.chip_text = G.GAME.blind.chips
                     return{
                         extra = { focus = card, message = "All y'all high refresh players who think Sonic Wave is easier then Erebus, first of all shut the fuck up and 2nd of all of the wave plays by itself for you guys."}
